@@ -38,16 +38,22 @@ export function anonymize(value, key) {
     }
 }
 
-const _find = MongoInternals.Connection.prototype.find;
-MongoInternals.Connection.prototype.find = function(collection, selector, mod, options) {
+function ingest(collection, query, type) {
     if (collection !== "oplog.rs") {
         HTTP.post("http://localhost:4000/api/ingest", {
             data: {
                 collection,
-                query: anonymize(selector),
+                query: anonymize(query),
                 type: "find"
             }
         });
     }
-    return _find.apply(this, arguments);
-};
+}
+
+["find", "findOne", "upsert", "update", "remove"].map(function(type) {
+    const original = MongoInternals.Connection.prototype[type];
+    MongoInternals.Connection.prototype[type] = function(collection, selector) {
+        ingest(collection, selector, type);
+        return original.apply(this, arguments);
+    };
+});
