@@ -1,5 +1,6 @@
 import _ from "lodash";
 import { HTTP } from "meteor/http";
+import { Meteor } from "meteor/meteor";
 import { MongoInternals } from "meteor/mongo";
 
 // https://github.com/meteor/meteor/blob/devel/packages/mongo/mongo_driver.js#L78-L101
@@ -42,7 +43,9 @@ function ingest(collection, query, type) {
     if (collection !== "oplog.rs") {
         HTTP.post("http://localhost:4000/api/ingest", {
             data: {
+                application_token: _.get(Meteor.settings, "inject-detect.token"),
                 collection,
+                queried_at: new Date(),
                 query: anonymize(query),
                 type: "find"
             }
