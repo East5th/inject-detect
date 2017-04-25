@@ -44,10 +44,14 @@ function ingest(collection, query, type) {
         HTTP.post("http://localhost:4000/api/ingest", {
             data: {
                 application_token: _.get(Meteor.settings, "inject-detect.token"),
-                collection,
-                queried_at: new Date(),
-                query: anonymize(query),
-                type: "find"
+                queries: [
+                    {
+                        collection,
+                        queried_at: new Date(),
+                        query: anonymize(query),
+                        type
+                    }
+                ]
             }
         });
     }

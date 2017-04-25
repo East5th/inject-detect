@@ -13,7 +13,7 @@ Package.describe({
 Package.onUse(function(api) {
   api.versionsFrom('1.4.2.7');
   api.use(['ecmascript', 'http']);
-  api.mainModule('inject-detect.js');
+  api.mainModule('inject-detect.js', 'server');
 });
 
 Package.onTest(function(api) {
