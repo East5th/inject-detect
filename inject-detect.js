@@ -60,7 +60,7 @@ const post = () => {
     });
 }
 
-const throttledPost = _.throttle(Meteor.bindEnvironment(post), 1000*30);
+const throttledPost = _.throttle(Meteor.bindEnvironment(post), 1000*10);
 
 function ingest(collection, query, type) {
     if (collection !== "oplog.rs") {
