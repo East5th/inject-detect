@@ -1,12 +1,11 @@
 # Inject Detect
 
-Be sure to configure your application's secret in your `settings.json` file. Additionally, if you want to see Inject Detect debug logging in your server logs, set `debug` to true.
+Be sure to configure your application's secret in your `settings.json` file.
 
 ```
 {
     "inject-detect": {
-        "secret": "ABC123...",
-        "debug": true
+        "secret": "ABC123..."
     }
 }
 ```
