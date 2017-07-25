@@ -1,6 +1,6 @@
 Package.describe({
     name: 'east5th:inject-detect',
-    version: '0.0.3',
+    version: '0.0.4',
     // Brief, one-line summary of the package.
     summary: 'Meteor package for Inject Detect. Inject Detect detects NoSQL Injection attacks in real time.',
     // URL to the Git repository containing the source code for this package.
