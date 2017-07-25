@@ -4,6 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { MongoInternals } from 'meteor/mongo';
 
 let queries = [];
+let rootUrl = Meteor.absoluteUrl();
 
 // https://github.com/meteor/meteor/blob/devel/packages/mongo/mongo_driver.js#L78-L101
 
@@ -63,7 +64,8 @@ function ingest(collection, query, type) {
             collection,
             queried_at: new Date(),
             query: anonymize(query),
-            type
+            type,
+            root_url: rootUrl
         });
         throttledPost();
     }
